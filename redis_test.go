@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/Gitforxuyang/microBase"
 	"github.com/Gitforxuyang/microBase/trace"
+	"github.com/Gitforxuyang/microRedis/command"
 	"testing"
 	"time"
 )
@@ -25,7 +26,7 @@ func TestGetClient(t *testing.T) {
 	//fmt.Println(c.Name())
 
 	//
-	mr := microRedis{env: "local"}
+	mr := microRedis{env: "local", clients: make(map[RedisClient]command.MicroRedisClient)}
 	client := mr.GetClient(Main)
 	err := client.Set(context.TODO(), "micro:demo", 1, time.Duration(-1))
 	if err != nil {

@@ -22,7 +22,7 @@ type microRedis struct {
 }
 
 func MicroRedisInit() MicroRedis {
-	return &microRedis{env: microBase.BaseConfig.ServerConfig.Env}
+	return &microRedis{env: microBase.BaseConfig.ServerConfig.Env, clients: make(map[RedisClient]command.MicroRedisClient)}
 }
 
 func (m *microRedis) GetClient(redisClient RedisClient) command.MicroRedisClient {
@@ -39,6 +39,9 @@ func (m *microRedis) GetClient(redisClient RedisClient) command.MicroRedisClient
 		handleFunc := wrapper.RedisTraceWrapper(microBase.BaseTracer, fmt.Sprintf("%s:%d", redisClient, config.DB))
 		c = command.NewClient(client, handleFunc)
 	}
+	fmt.Println(m.clients[redisClient])
+	fmt.Println(c)
+	fmt.Println("1111")
 	m.clients[redisClient] = c
 	m.Unlock()
 	return c
