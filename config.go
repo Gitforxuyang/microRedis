@@ -28,7 +28,7 @@ func getConfig(env string, client RedisClient) redisConfig {
 //初始化本地配置
 func initLocalConfig() microRedisConfig {
 	cfg := microRedisConfig{Clients: make(map[RedisClient]redisConfig)}
-	cfg.Clients[Main] = redisConfig{Addr: "192.168.3.3:6379", Password: "", DB: 0, PoolSize: 5}
-	cfg.Clients[Node] = redisConfig{Addr: "192.168.3.3:6379", Password: "", DB: 0, PoolSize: 5}
+	cfg.Clients[Main] = redisConfig{Addr: "127.0.0.1:6379", Password: "", DB: 0, PoolSize: 5}
+	cfg.Clients[Node] = redisConfig{Addr: "127.0.0.1:6379", Password: "", DB: 0, PoolSize: 5}
 	return cfg
 }
