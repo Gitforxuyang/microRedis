@@ -33,7 +33,7 @@ type RedisTraceHandleFunc func(ctx context.Context, cmd string) RedisSpan
 
 func RedisTraceWrapper(ot opentracing.Tracer, instance string) RedisTraceHandleFunc {
 	return func(ctx context.Context, cmd string) RedisSpan {
-		ctx, span, err := trace.StartSpanFromContext(ctx, ot, cmd)
+		ctx, span, err := trace.StartSpanFromContext(ctx, ot, fmt.Sprintf("%s.%s", "Reids", cmd))
 		span.SetTag("span.kind", "client")
 		span.SetTag("component", "microRedis")
 		span.SetTag("db.instance", instance)

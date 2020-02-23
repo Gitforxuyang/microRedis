@@ -6,7 +6,7 @@ import (
 )
 
 func (m *microRedisClient) Set(ctx context.Context, key string, value interface{}, expiration time.Duration) (err error) {
-	span := m.handleFunc(ctx, "set")
+	span := m.handleFunc(ctx, "Set")
 	cmd := m.client.Set(key, value, expiration)
 	_, err = cmd.Result()
 	span.SetCmd(cmd.String())
